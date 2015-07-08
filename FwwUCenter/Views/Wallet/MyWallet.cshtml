@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "我的电子钱包";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("转账", "TransferAcount", "Wallet")</li>
+        <li>@Html.ActionLink("提现", "WithdrawCash", "Wallet")</li>
+        <li>@Html.ActionLink("账单", "MyBill", "Wallet")</li>
+        <li>@Html.ActionLink("购买", "WalletPurchase", "Wallet")</li>
+    </ul>
+</div>

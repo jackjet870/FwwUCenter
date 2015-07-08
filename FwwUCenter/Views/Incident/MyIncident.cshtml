@@ -1,0 +1,17 @@
+﻿@{
+    ViewBag.Title = "我的工单";
+}
+<h2>@ViewBag.Title.</h2>
+
+<div class="thumbnail">
+    <img src="~/Content/image/Icon/ywbl.jpg" />
+
+    <div class="caption">
+        <ul class="list-group">
+            <li class="list-group-item">@Html.ActionLink("商家申请", "NewCompany", "Incident")</li>
+            <li class="list-group-item">@Html.ActionLink("代理商申请", "NewAgent", "Incident")</li>
+            <li class="list-group-item">@Html.ActionLink("运营中心申请", "NewOperationCenter", "Incident")</li>
+        </ul>
+
+    </div>
+</div>

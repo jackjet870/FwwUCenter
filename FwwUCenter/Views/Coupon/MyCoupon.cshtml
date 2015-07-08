@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "我的兑现券";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+<p>排队按照最新的方式做，仿照微信的逻辑</p>
+<p>全国兑现券排队情况查看包含两部分，一个是老系统的页面，一个是微信查看的页面</p>
+
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("全国兑现券排队情况查看", "AllCoupon", "Coupon")</li>
+        <li>@Html.ActionLink("排队", "LineupCoupon", "Coupon")</li>
+        <li>@Html.ActionLink("转让", "TransferCoupon", "Coupon")</li>
+        <li>@Html.ActionLink("购买", "BuyCoupon", "Coupon")</li>
+    </ul>
+</div>

@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "帐号设置";
+}
+
+<h3>基本信息</h3>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("个人信息修改", "UserInfo", "Account")</li>
+        <li>@Html.ActionLink("财务信息修改", "UserFinInfo", "Account")</li>
+        <li>@Html.ActionLink("绑定会员卡", "UserCard", "Account")</li>
+    </ul>
+</div>
+<h3>我的公司</h3>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("我的公司", "MyCompany", "Account")</li>
+        <li>@Html.ActionLink("我的资质", "MyQualification", "Account")</li>
+    </ul>
+</div>
+<h3>我的联盟会员</h3>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("我的联盟会员", "MyMembers", "Account")</li>
+    </ul>
+</div>
+<h3>密码安全</h3>
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("登录密码修改", "MyPwd", "Account")</li>
+        <li>@Html.ActionLink("支付密码修改", "MyPayPwd", "Account")</li>
+        <li>@Html.ActionLink("支付密码申诉", "MyAppealPayPwd", "Account")</li>
+
+    </ul>
+</div>

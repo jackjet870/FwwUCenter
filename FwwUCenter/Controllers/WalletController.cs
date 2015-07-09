@@ -8,14 +8,14 @@ namespace FwwUCenter.Controllers
 {
     public class WalletController : BaseController
     {
-        [MemberAuthorize]
+      [Authorize]
         public ActionResult MyWallet()
         {
             //我的钱包 包含 电子钱包余额\车票等等信息
             return View();
         }
 
-        [MemberAuthorize]
+        
         public ActionResult MyBill()
         {
             ViewBag.Message = "Your page.";
@@ -23,7 +23,7 @@ namespace FwwUCenter.Controllers
             return View();
         }
 
-         [MemberAuthorize]
+        
         public ActionResult TransferAcount()
         {
             ViewBag.Message = "Your page.";
@@ -31,7 +31,7 @@ namespace FwwUCenter.Controllers
             return View();
         }
 
-         [MemberAuthorize]
+         
         public ActionResult WithdrawCash()
         {
             ViewBag.Message = "Your page.";
@@ -39,7 +39,7 @@ namespace FwwUCenter.Controllers
             return View();
         }
 
-         [MemberAuthorize]
+         
         public ActionResult WalletPurchase()
         {
             ViewBag.Message = "Your page.";

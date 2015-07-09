@@ -18,17 +18,18 @@
                     <span class="icon-bar"></span>
                 </button>
                 
-                @Html.ActionLink("主页", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" }) 
+                @Html.ActionLink("主页", "Dashboard", "Dashboard", new { area = "" }, new { @class = "navbar-brand" }) 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("帐号设置", "Account", "Account")</li>
+                    <li>@Html.ActionLink(@User.Identity.Name, "Account", "Account")</li>
                     <li>@Html.ActionLink("公告", "Noti", "Home")</li>                    
                     <li>@Html.ActionLink("我的工单", "MyIncident", "Incident")</li>
                     <li>@Html.ActionLink("我的订单", "MyOrders", "Orders")</li>
                     <li>@Html.ActionLink("我的兑现卷", "MyCoupon", "Coupon")</li>
                     <li>@Html.ActionLink("我的电子钱包", "MyWallet", "Wallet")</li>
                     <li>@Html.ActionLink("资源中心", "Resourcecenter", "Home")</li>
+                    <li>@Html.ActionLink("退出", "Logout", "Home")</li>
                     
                 </ul>
                

@@ -3,30 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace FwwUCenter.Controllers
 {
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
-         [MemberAuthorize]
+
         public ActionResult Index()
         {
             return View();
         }
 
-         [MemberAuthorize]
-        public ActionResult Noti()
+        [HttpPost]
+        public ActionResult SignIn(string UserName, string Password)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
+            //UserName.ToUpper() == "ZCZCZY" && Password.ToUpper() == "ZCZCZY2015"
+            if (!String.IsNullOrEmpty(UserName))
+            {
+                FormsAuthentication.SetAuthCookie(UserName, false);
+                return Redirect("/Dashboard/Dashboard");
+            }
+            return Redirect("/");
         }
-         [MemberAuthorize]
-        public ActionResult Resourcecenter()
+
+         
+        public ActionResult Logout()
         {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            FormsAuthentication.SignOut();
+            return Redirect("/");
         }
+        
+
     }
 }

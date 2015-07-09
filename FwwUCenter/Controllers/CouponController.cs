@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FwwUCenter.Controllers
 {
+    [Authorize]
     public class CouponController : BaseController
     {
         public ActionResult MyCoupon()

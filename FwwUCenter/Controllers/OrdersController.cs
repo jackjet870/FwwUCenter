@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FwwUCenter.Controllers
 {
+    [Authorize]
     public class OrdersController : BaseController
     {
         public ActionResult MyOrders()

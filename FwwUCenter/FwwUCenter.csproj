@@ -125,6 +125,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\IncidentController.cs" />
     <Compile Include="Controllers\WalletController.cs" />
@@ -181,12 +182,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Noti.cshtml" />
-    <Content Include="Views\Home\Resourcecenter.cshtml" />
+    <Content Include="Views\Dashboard\Noti.cshtml" />
+    <Content Include="Views\Dashboard\Resourcecenter.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Account\Account.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\MyAppealPayPwd.cshtml" />
     <Content Include="Views\Account\UserInfo.cshtml" />
     <Content Include="Views\Account\UserFinInfo.cshtml" />
@@ -195,7 +195,6 @@
     <Content Include="Views\Account\MyQualification.cshtml" />
     <Content Include="Views\Account\MyPwd.cshtml" />
     <Content Include="Views\Account\MyPayPwd.cshtml" />
-    <Content Include="Views\Account\Logout.cshtml" />
     <Content Include="Views\Coupon\MyCoupon.cshtml" />
     <Content Include="Views\Coupon\AllCoupon.cshtml" />
     <Content Include="Views\Coupon\BuyCoupon.cshtml" />
@@ -214,6 +213,8 @@
     <Content Include="Views\Orders\NewOrder.cshtml" />
     <Content Include="Views\Orders\LookupOrder.cshtml" />
     <Content Include="Views\Incident\MyIncident.cshtml" />
+    <Content Include="Views\Home\Logout.cshtml" />
+    <Content Include="Views\Dashboard\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

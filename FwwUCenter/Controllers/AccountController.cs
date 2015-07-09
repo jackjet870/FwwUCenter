@@ -6,25 +6,11 @@ using System.Web.Mvc;
 
 namespace FwwUCenter.Controllers
 {
+    [Authorize]
     public class AccountController : BaseController
     {
         public ActionResult Account()
         {
-            return View();
-        }
-
-        public ActionResult Login()
-        {
-            ViewBag.Message = "";
-            Session["loginuserid"] = "Ricky";
-
-            return View();
-        }
-
-        public ActionResult Logout()
-        {
-            ViewBag.Message = "";
-
             return View();
         }
 

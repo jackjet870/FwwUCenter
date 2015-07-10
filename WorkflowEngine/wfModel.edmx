@@ -1,0 +1,283 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="WorkflowEngineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountGroup">
+          <Key>
+            <PropertyRef Name="GroupCode" />
+          </Key>
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroupName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountGroupMembers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountID" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountPWD" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccountStatus" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="wfDefaultApproverGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wfDefaultApprovers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wfDefinition">
+          <Key>
+            <PropertyRef Name="wfCode" />
+          </Key>
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wfStepPath">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FromStepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ToStepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PathType" Type="nvarchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wfSteps">
+          <Key>
+            <PropertyRef Name="StepCode" />
+          </Key>
+          <Property Name="StepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Flag" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Function Name="Proc_NewTicket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="nvarchar" Mode="In" />
+          <Parameter Name="wfCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="WorkflowEngineModelStoreContainer">
+          <EntitySet Name="AccountGroup" EntityType="Self.AccountGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AccountGroupMembers" EntityType="Self.AccountGroupMembers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wfDefaultApproverGroup" EntityType="Self.wfDefaultApproverGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wfDefaultApprovers" EntityType="Self.wfDefaultApprovers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wfDefinition" EntityType="Self.wfDefinition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wfStepPath" EntityType="Self.wfStepPath" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="wfSteps" EntityType="Self.wfSteps" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WorkflowEngineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountGroup">
+          <Key>
+            <PropertyRef Name="GroupCode" />
+          </Key>
+          <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AccountGroupMembers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="AccountID" />
+          </Key>
+          <Property Name="AccountID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountPWD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccountStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="wfDefaultApproverGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="StepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wfDefaultApprovers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="StepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wfDefinition">
+          <Key>
+            <PropertyRef Name="wfCode" />
+          </Key>
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wfStepPath">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="FromStepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ToStepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PathType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="wfSteps">
+          <Key>
+            <PropertyRef Name="StepCode" />
+          </Key>
+          <Property Name="StepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StepName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Flag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="WorkflowEngineEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountGroup" EntityType="Self.AccountGroup" />
+          <EntitySet Name="AccountGroupMembers" EntityType="Self.AccountGroupMembers" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="wfDefaultApproverGroup" EntityType="Self.wfDefaultApproverGroup" />
+          <EntitySet Name="wfDefaultApprovers" EntityType="Self.wfDefaultApprovers" />
+          <EntitySet Name="wfDefinition" EntityType="Self.wfDefinition" />
+          <EntitySet Name="wfStepPath" EntityType="Self.wfStepPath" />
+          <EntitySet Name="wfSteps" EntityType="Self.wfSteps" />
+          <FunctionImport Name="Proc_NewTicket">
+            <Parameter Name="userid" Mode="In" Type="String" />
+            <Parameter Name="wfCode" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WorkflowEngineModelStoreContainer" CdmEntityContainer="WorkflowEngineEntities">
+          <EntitySetMapping Name="AccountGroup">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.AccountGroup">
+              <MappingFragment StoreEntitySet="AccountGroup">
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AccountGroupMembers">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.AccountGroupMembers">
+              <MappingFragment StoreEntitySet="AccountGroupMembers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.Accounts">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="AccountPWD" ColumnName="AccountPWD" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wfDefaultApproverGroup">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.wfDefaultApproverGroup">
+              <MappingFragment StoreEntitySet="wfDefaultApproverGroup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wfDefaultApprovers">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.wfDefaultApprovers">
+              <MappingFragment StoreEntitySet="wfDefaultApprovers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wfDefinition">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.wfDefinition">
+              <MappingFragment StoreEntitySet="wfDefinition">
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="wfName" ColumnName="wfName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wfStepPath">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.wfStepPath">
+              <MappingFragment StoreEntitySet="wfStepPath">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FromStepCode" ColumnName="FromStepCode" />
+                <ScalarProperty Name="ToStepCode" ColumnName="ToStepCode" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="PathType" ColumnName="PathType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wfSteps">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.wfSteps">
+              <MappingFragment StoreEntitySet="wfSteps">
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="Flag" ColumnName="Flag" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Proc_NewTicket" FunctionName="WorkflowEngineModel.Store.Proc_NewTicket" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

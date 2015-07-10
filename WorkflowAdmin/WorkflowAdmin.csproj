@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{24BA0AA9-42CB-4FF0-BEB7-BE4A1852FA8C}</ProjectGuid>
+    <ProjectGuid>{8B31FC0A-A6F3-4802-ABF2-DCCA3F4BBF6C}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FwwUCenter</RootNamespace>
-    <AssemblyName>FwwUCenter</AssemblyName>
+    <RootNamespace>WorkflowAdmin</RootNamespace>
+    <AssemblyName>WorkflowAdmin</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -39,28 +39,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -123,14 +119,16 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AccountGroupMembersController.cs" />
+    <Compile Include="Controllers\AccountGroupsController.cs" />
+    <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Controllers\IncidentController.cs" />
-    <Compile Include="Controllers\WalletController.cs" />
-    <Compile Include="Controllers\CouponController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\wfDefaultApproverGroupsController.cs" />
+    <Compile Include="Controllers\wfDefaultApproversController.cs" />
+    <Compile Include="Controllers\wfDefinitionsController.cs" />
+    <Compile Include="Controllers\wfStepPathsController.cs" />
+    <Compile Include="Controllers\wfStepsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -139,19 +137,6 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\image\Icon\ksbl.jpg" />
-    <Content Include="Content\image\Icon\ywbl.jpg" />
-    <Content Include="Content\image\Icon\zlws.jpg" />
-    <Content Include="Content\image\Slider\01.jpg" />
-    <Content Include="Content\image\Slider\02.jpg" />
-    <Content Include="Content\image\Slider\03.jpg" />
-    <Content Include="Content\image\Slider\04.jpg" />
-    <Content Include="Content\image\Slider\05.jpg" />
-    <Content Include="Content\image\Slider\06.jpg" />
-    <Content Include="Content\image\Slider\07.jpg" />
-    <Content Include="Content\image\Slider\08.jpg" />
-    <Content Include="Content\image\Slider\b03.png" />
-    <Content Include="Content\image\Slider\loading.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -166,14 +151,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\jssor.slider.mini.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -184,38 +166,49 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Dashboard\Noti.cshtml" />
-    <Content Include="Views\Dashboard\Resourcecenter.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Dashboard\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Account\Account.cshtml" />
-    <Content Include="Views\Account\MyAppealPayPwd.cshtml" />
-    <Content Include="Views\Account\UserInfo.cshtml" />
-    <Content Include="Views\Account\UserFinInfo.cshtml" />
-    <Content Include="Views\Account\UserCard.cshtml" />
-    <Content Include="Views\Account\MyCompany.cshtml" />
-    <Content Include="Views\Account\MyQualification.cshtml" />
-    <Content Include="Views\Account\MyPwd.cshtml" />
-    <Content Include="Views\Account\MyPayPwd.cshtml" />
-    <Content Include="Views\Coupon\MyCoupon.cshtml" />
-    <Content Include="Views\Coupon\AllCoupon.cshtml" />
-    <Content Include="Views\Coupon\BuyCoupon.cshtml" />
-    <Content Include="Views\Coupon\LineupCoupon.cshtml" />
-    <Content Include="Views\Coupon\TransferCoupon.cshtml" />
-    <Content Include="Views\Wallet\MyWallet.cshtml" />
-    <Content Include="Views\Wallet\TransferAcount.cshtml" />
-    <Content Include="Views\Wallet\WithdrawCash.cshtml" />
-    <Content Include="Views\Wallet\WalletPurchase.cshtml" />
-    <Content Include="Views\Wallet\MyBill.cshtml" />
-    <Content Include="Views\Account\MyMembers.cshtml" />
-    <Content Include="Views\Incident\NewCompany.cshtml" />
-    <Content Include="Views\Incident\NewAgent.cshtml" />
-    <Content Include="Views\Incident\NewOperationCenter.cshtml" />
-    <Content Include="Views\Orders\MyOrders.cshtml" />
-    <Content Include="Views\Orders\NewOrder.cshtml" />
-    <Content Include="Views\Orders\LookupOrder.cshtml" />
-    <Content Include="Views\Incident\MyIncident.cshtml" />
-    <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\Accounts\Create.cshtml" />
+    <Content Include="Views\Accounts\Delete.cshtml" />
+    <Content Include="Views\Accounts\Details.cshtml" />
+    <Content Include="Views\Accounts\Edit.cshtml" />
+    <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\AccountGroups\Create.cshtml" />
+    <Content Include="Views\AccountGroups\Delete.cshtml" />
+    <Content Include="Views\AccountGroups\Details.cshtml" />
+    <Content Include="Views\AccountGroups\Edit.cshtml" />
+    <Content Include="Views\AccountGroups\Index.cshtml" />
+    <Content Include="Views\AccountGroupMembers\Create.cshtml" />
+    <Content Include="Views\AccountGroupMembers\Delete.cshtml" />
+    <Content Include="Views\AccountGroupMembers\Details.cshtml" />
+    <Content Include="Views\AccountGroupMembers\Edit.cshtml" />
+    <Content Include="Views\AccountGroupMembers\Index.cshtml" />
+    <Content Include="Views\wfDefinitions\Create.cshtml" />
+    <Content Include="Views\wfDefinitions\Delete.cshtml" />
+    <Content Include="Views\wfDefinitions\Details.cshtml" />
+    <Content Include="Views\wfDefinitions\Edit.cshtml" />
+    <Content Include="Views\wfDefinitions\Index.cshtml" />
+    <Content Include="Views\wfSteps\Create.cshtml" />
+    <Content Include="Views\wfSteps\Delete.cshtml" />
+    <Content Include="Views\wfSteps\Details.cshtml" />
+    <Content Include="Views\wfSteps\Edit.cshtml" />
+    <Content Include="Views\wfSteps\Index.cshtml" />
+    <Content Include="Views\wfStepPaths\Create.cshtml" />
+    <Content Include="Views\wfStepPaths\Delete.cshtml" />
+    <Content Include="Views\wfStepPaths\Details.cshtml" />
+    <Content Include="Views\wfStepPaths\Edit.cshtml" />
+    <Content Include="Views\wfStepPaths\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\wfDefaultApproverGroups\Create.cshtml" />
+    <Content Include="Views\wfDefaultApproverGroups\Delete.cshtml" />
+    <Content Include="Views\wfDefaultApproverGroups\Details.cshtml" />
+    <Content Include="Views\wfDefaultApproverGroups\Edit.cshtml" />
+    <Content Include="Views\wfDefaultApproverGroups\Index.cshtml" />
+    <Content Include="Views\wfDefaultApprovers\Create.cshtml" />
+    <Content Include="Views\wfDefaultApprovers\Delete.cshtml" />
+    <Content Include="Views\wfDefaultApprovers\Details.cshtml" />
+    <Content Include="Views\wfDefaultApprovers\Edit.cshtml" />
+    <Content Include="Views\wfDefaultApprovers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -226,6 +219,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorkflowEngine\WorkflowEngine.csproj">
+      <Project>{03c1b382-cd4f-45e9-8c98-19515f87a4b5}</Project>
+      <Name>WorkflowEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -243,9 +246,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>18445</DevelopmentServerPort>
+          <DevelopmentServerPort>50636</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:18280/</IISUrl>
+          <IISUrl>http://localhost:50636/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

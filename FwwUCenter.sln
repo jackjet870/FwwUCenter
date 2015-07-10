@@ -5,6 +5,10 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FwwUCenter", "FwwUCenter\FwwUCenter.csproj", "{24BA0AA9-42CB-4FF0-BEB7-BE4A1852FA8C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowAdmin", "WorkflowAdmin\WorkflowAdmin.csproj", "{8B31FC0A-A6F3-4802-ABF2-DCCA3F4BBF6C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorkflowEngine", "WorkflowEngine\WorkflowEngine.csproj", "{03C1B382-CD4F-45E9-8C98-19515F87A4B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{24BA0AA9-42CB-4FF0-BEB7-BE4A1852FA8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24BA0AA9-42CB-4FF0-BEB7-BE4A1852FA8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24BA0AA9-42CB-4FF0-BEB7-BE4A1852FA8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B31FC0A-A6F3-4802-ABF2-DCCA3F4BBF6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B31FC0A-A6F3-4802-ABF2-DCCA3F4BBF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B31FC0A-A6F3-4802-ABF2-DCCA3F4BBF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B31FC0A-A6F3-4802-ABF2-DCCA3F4BBF6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03C1B382-CD4F-45E9-8C98-19515F87A4B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03C1B382-CD4F-45E9-8C98-19515F87A4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03C1B382-CD4F-45E9-8C98-19515F87A4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03C1B382-CD4F-45E9-8C98-19515F87A4B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

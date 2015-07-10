@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title 中国消费服务网会员中心</title>
+    <title>@ViewBag.Title - 工作流控制台</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -17,33 +17,35 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                
-                @Html.ActionLink("主页", "Dashboard", "Dashboard", new { area = "" }, new { @class = "navbar-brand" }) 
+                @Html.ActionLink("工作流控制台", "Index", "Dashboard", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink(@User.Identity.Name, "Account", "Account")</li>
-                    <li>@Html.ActionLink("公告", "Noti", "Dashboard")</li>                    
-                    <li>@Html.ActionLink("我的工单", "MyIncident", "Incident")</li>
-                    <li>@Html.ActionLink("我的订单", "MyOrders", "Orders")</li>
-                    <li>@Html.ActionLink("我的兑现卷", "MyCoupon", "Coupon")</li>
-                    <li>@Html.ActionLink("我的电子钱包", "MyWallet", "Wallet")</li>
-                    <li>@Html.ActionLink("资源中心", "Resourcecenter", "Dashboard")</li>
+                    <li>@Html.ActionLink(@User.Identity.Name, "Index", "Dashboard")</li>
+
+                    <li>@Html.ActionLink("用户", "Index", "Accounts")</li>
+                    <li>@Html.ActionLink("用户组", "Index", "AccountGroups")</li>
+                    <li>@Html.ActionLink("用户组成员", "Index", "AccountGroupMembers")</li>
+
+                    <li>@Html.ActionLink("流程定义", "Index", "wfDefinitions")</li>
+                    <li>@Html.ActionLink("流程步骤", "Index", "wfSteps")</li>
+                    <li>@Html.ActionLink("步骤线条", "Index", "wfStepPaths")</li>
+                    <li>@Html.ActionLink("默认审批组", "Index", "wfDefaultApproverGroups")</li>
+                    <li>@Html.ActionLink("默认审批人", "Index", "wfDefaultApprovers")</li>
                     <li>@Html.ActionLink("退出", "Logout", "Home")</li>
-                    
+
                 </ul>
-               
             </div>
         </div>
     </div>
     <div class="container body-content">
         @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 应用程序</p>
+        </footer>
     </div>
-        <nav class="navbar navbar-default navbar-fixed-bottom">
-            <div class="container">
-                &copy; @DateTime.Now.Year -中财卓创智源（北京）科技有限公司  京ICP证101008号 | 京ICP备12014530号  
-            </div>
-        </nav>
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

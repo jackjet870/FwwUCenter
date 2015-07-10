@@ -1,0 +1,51 @@
+﻿@model WorkflowEngine.wfStepPath
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>wfStepPath</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FromStepCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FromStepCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ToStepCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ToStepCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.wfCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.wfCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PathType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PathType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

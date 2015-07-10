@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{03C1B382-CD4F-45E9-8C98-19515F87A4B5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WorkflowEngine</RootNamespace>
+    <AssemblyName>WorkflowEngine</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountGroup.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AccountGroupMembers.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Accounts.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wfDefaultApproverGroup.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wfDefaultApprovers.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wfDefinition.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wfModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wfModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wfModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wfModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>wfModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="WFService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="wfStepPath.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wfSteps.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
+    <EntityDeploy Include="wfModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>wfModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="wfModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>wfModel.edmx</DependentUpon>
+      <LastGenOutput>wfModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="wfModel.edmx.diagram">
+      <DependentUpon>wfModel.edmx</DependentUpon>
+    </None>
+    <None Include="wfModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>wfModel.edmx</DependentUpon>
+      <LastGenOutput>wfModel.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,12 +1,16 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using WorkflowEngine;
 
 namespace WorkflowAdmin.Controllers
 {
-     [Authorize]
     public class wfStepsController : Controller
     {
         private WorkflowEngineEntities db = new WorkflowEngineEntities();
@@ -43,7 +47,7 @@ namespace WorkflowAdmin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "StepCode,StepName,Flag,wfCode")] wfSteps wfSteps)
+        public async Task<ActionResult> Create([Bind(Include = "StepCode,StepName,Flag,wfCode,IsForcedApproved")] wfSteps wfSteps)
         {
             if (ModelState.IsValid)
             {
@@ -75,7 +79,7 @@ namespace WorkflowAdmin.Controllers
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "StepCode,StepName,Flag,wfCode")] wfSteps wfSteps)
+        public async Task<ActionResult> Edit([Bind(Include = "StepCode,StepName,Flag,wfCode,IsForcedApproved")] wfSteps wfSteps)
         {
             if (ModelState.IsValid)
             {

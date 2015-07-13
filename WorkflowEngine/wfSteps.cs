@@ -18,5 +18,6 @@ namespace WorkflowEngine
         public string StepName { get; set; }
         public string Flag { get; set; }
         public string wfCode { get; set; }
+        public string IsForcedApproved { get; set; }
     }
 }

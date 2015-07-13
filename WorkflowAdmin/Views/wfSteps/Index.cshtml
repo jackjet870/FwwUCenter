@@ -24,6 +24,9 @@
         <th>
             @Html.DisplayNameFor(model => model.wfCode)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsForcedApproved)
+        </th>
         <th></th>
     </tr>
 
@@ -40,6 +43,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.wfCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsForcedApproved)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.StepCode }) |

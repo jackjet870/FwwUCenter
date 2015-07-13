@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="WorkflowEngineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="WorkflowEngineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountGroup">
           <Key>
             <PropertyRef Name="GroupCode" />
@@ -72,6 +72,7 @@
           <Property Name="StepName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Flag" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsForcedApproved" Type="nvarchar" MaxLength="1" />
         </EntityType>
         <Function Name="Proc_NewTicket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="nvarchar" Mode="In" />
@@ -87,8 +88,7 @@
           <EntitySet Name="wfStepPath" EntityType="Self.wfStepPath" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wfSteps" EntityType="Self.wfSteps" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WorkflowEngineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -159,6 +159,7 @@
           <Property Name="StepName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Flag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsForcedApproved" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="WorkflowEngineEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccountGroup" EntityType="Self.AccountGroup" />
@@ -249,6 +250,7 @@
           <EntitySetMapping Name="wfSteps">
             <EntityTypeMapping TypeName="WorkflowEngineModel.wfSteps">
               <MappingFragment StoreEntitySet="wfSteps">
+                <ScalarProperty Name="IsForcedApproved" ColumnName="IsForcedApproved" />
                 <ScalarProperty Name="StepCode" ColumnName="StepCode" />
                 <ScalarProperty Name="StepName" ColumnName="StepName" />
                 <ScalarProperty Name="Flag" ColumnName="Flag" />

@@ -52,16 +52,12 @@ namespace WorkflowEngine
         {
             return "dlfjalfdsjkfa";
         }
-        public string GetNextStepApprovers()
-        {
-            return "dlfjalfdsjkfa";
-        }
         public string GetCurrentStepApprovers()
         {
             return "dlfjalfdsjkfa";
         }
 
-        public string GetIFCurrentStepApproverOrNot()
+        public string GetIFCurrentApproverOrNot()
         {
             return "dlfjalfdsjkfa";
         }

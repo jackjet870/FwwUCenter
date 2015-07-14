@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WorkflowEngineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="WorkflowEngineModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AccountGroup">
           <Key>
             <PropertyRef Name="GroupCode" />
@@ -28,6 +28,89 @@
           <Property Name="AccountPWD" Type="nvarchar" MaxLength="50" />
           <Property Name="UserName" Type="nvarchar" MaxLength="50" />
           <Property Name="AccountStatus" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Ticket_SeqT">
+          <Key>
+            <PropertyRef Name="SeqID" />
+          </Key>
+          <Property Name="SeqID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SeqVal" Type="varchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="TicketNum" />
+          </Key>
+          <Property Name="TicketNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TicketTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TicketStatus" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="proposer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedDatetime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketsDefaultApproverGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="GroupCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TicketNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketsDefaultApprovers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="StepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TicketNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketsLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TicketNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepFlag" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="ApprovedResult" Type="nvarchar" MaxLength="1" />
+          <Property Name="Approver" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApproverName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApprovedDatetime" Type="datetime" />
+          <Property Name="ApproverMemo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TicketsStepPath">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FromStepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ToStepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TicketNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PathType" Type="nvarchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketsSteps">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="TicketNum" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StepFlag" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsForcedApproved" Type="nvarchar" MaxLength="1" />
+          <Property Name="ApprovedResult" Type="nvarchar" MaxLength="1" />
+          <Property Name="Approver" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApproverName" Type="nvarchar" MaxLength="50" />
+          <Property Name="ApprovedDatetime" Type="datetime" />
+          <Property Name="ApproverMemo" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="wfDefaultApproverGroup">
           <Key>
@@ -74,21 +157,66 @@
           <Property Name="wfCode" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IsForcedApproved" Type="nvarchar" MaxLength="1" />
         </EntityType>
+        <Function Name="Proc_ApprovalDenied" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="nvarchar" Mode="In" />
+          <Parameter Name="ticketNum" Type="nvarchar" Mode="In" />
+          <Parameter Name="memo" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Proc_ApprovalPassed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="nvarchar" Mode="In" />
+          <Parameter Name="ticketNum" Type="nvarchar" Mode="In" />
+          <Parameter Name="memo" Type="nvarchar(max)" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetCompletedTickets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="nvarchar" Mode="In" />
+          <Parameter Name="wfCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetInprogressTickets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="nvarchar" Mode="In" />
+          <Parameter Name="wfCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_GetTodoTickets" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="nvarchar" Mode="In" />
+          <Parameter Name="wfCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_IsCurrentApprover" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ticketNum" Type="nvarchar" Mode="In" />
+          <Parameter Name="userid" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_NewSeqVal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="Proc_NewTicket" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="nvarchar" Mode="In" />
           <Parameter Name="wfCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_QueryCurrentApprovers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ticketNum" Type="nvarchar" Mode="In" />
+          <Parameter Name="stepCode" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_QueryTicketCurrentStep" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ticketNum" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Proc_QueryTicketProgress" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ticketNum" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="WorkflowEngineModelStoreContainer">
           <EntitySet Name="AccountGroup" EntityType="Self.AccountGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AccountGroupMembers" EntityType="Self.AccountGroupMembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ticket_SeqT" EntityType="Self.Ticket_SeqT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketsDefaultApproverGroup" EntityType="Self.TicketsDefaultApproverGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketsDefaultApprovers" EntityType="Self.TicketsDefaultApprovers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketsLog" EntityType="Self.TicketsLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketsStepPath" EntityType="Self.TicketsStepPath" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketsSteps" EntityType="Self.TicketsSteps" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wfDefaultApproverGroup" EntityType="Self.wfDefaultApproverGroup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wfDefaultApprovers" EntityType="Self.wfDefaultApprovers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wfDefinition" EntityType="Self.wfDefinition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wfStepPath" EntityType="Self.wfStepPath" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="wfSteps" EntityType="Self.wfSteps" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="WorkflowEngineModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -115,6 +243,89 @@
           <Property Name="AccountPWD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AccountStatus" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Ticket_SeqT">
+          <Key>
+            <PropertyRef Name="SeqID" />
+          </Key>
+          <Property Name="SeqID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeqVal" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="TicketNum" />
+          </Key>
+          <Property Name="TicketNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TicketTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TicketStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="proposer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDatetime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TicketsDefaultApproverGroup">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="StepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TicketNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketsDefaultApprovers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="StepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TicketNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketsLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="TicketNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StepName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StepFlag" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ApprovedResult" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Approver" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApproverName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="ApproverMemo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TicketsStepPath">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="FromStepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ToStepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TicketNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PathType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TicketsSteps">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="TicketNum" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="wfCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StepCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StepName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StepFlag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsForcedApproved" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedResult" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Approver" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApproverName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedDatetime" Type="DateTime" Precision="3" />
+          <Property Name="ApproverMemo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="wfDefaultApproverGroup">
           <Key>
@@ -165,16 +376,142 @@
           <EntitySet Name="AccountGroup" EntityType="Self.AccountGroup" />
           <EntitySet Name="AccountGroupMembers" EntityType="Self.AccountGroupMembers" />
           <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="Ticket_SeqT" EntityType="Self.Ticket_SeqT" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" />
+          <EntitySet Name="TicketsDefaultApproverGroup" EntityType="Self.TicketsDefaultApproverGroup" />
+          <EntitySet Name="TicketsDefaultApprovers" EntityType="Self.TicketsDefaultApprovers" />
+          <EntitySet Name="TicketsLog" EntityType="Self.TicketsLog" />
+          <EntitySet Name="TicketsStepPath" EntityType="Self.TicketsStepPath" />
+          <EntitySet Name="TicketsSteps" EntityType="Self.TicketsSteps" />
           <EntitySet Name="wfDefaultApproverGroup" EntityType="Self.wfDefaultApproverGroup" />
           <EntitySet Name="wfDefaultApprovers" EntityType="Self.wfDefaultApprovers" />
           <EntitySet Name="wfDefinition" EntityType="Self.wfDefinition" />
           <EntitySet Name="wfStepPath" EntityType="Self.wfStepPath" />
           <EntitySet Name="wfSteps" EntityType="Self.wfSteps" />
+          <FunctionImport Name="Proc_ApprovalDenied">
+            <Parameter Name="userid" Mode="In" Type="String" />
+            <Parameter Name="ticketNum" Mode="In" Type="String" />
+            <Parameter Name="memo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_ApprovalPassed">
+            <Parameter Name="userid" Mode="In" Type="String" />
+            <Parameter Name="ticketNum" Mode="In" Type="String" />
+            <Parameter Name="memo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetCompletedTickets" ReturnType="Collection(WorkflowEngineModel.Proc_GetCompletedTickets_Result)">
+            <Parameter Name="userid" Mode="In" Type="String" />
+            <Parameter Name="wfCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetInprogressTickets" ReturnType="Collection(WorkflowEngineModel.Proc_GetInprogressTickets_Result)">
+            <Parameter Name="userid" Mode="In" Type="String" />
+            <Parameter Name="wfCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_GetTodoTickets" ReturnType="Collection(WorkflowEngineModel.Proc_GetTodoTickets_Result)">
+            <Parameter Name="userid" Mode="In" Type="String" />
+            <Parameter Name="wfCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_IsCurrentApprover" ReturnType="Collection(WorkflowEngineModel.Proc_IsCurrentApprover_Result)">
+            <Parameter Name="ticketNum" Mode="In" Type="String" />
+            <Parameter Name="userid" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_NewSeqVal" />
           <FunctionImport Name="Proc_NewTicket">
             <Parameter Name="userid" Mode="In" Type="String" />
             <Parameter Name="wfCode" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="Proc_QueryCurrentApprovers" ReturnType="Collection(WorkflowEngineModel.Proc_QueryCurrentApprovers_Result)">
+            <Parameter Name="ticketNum" Mode="In" Type="String" />
+            <Parameter Name="stepCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_QueryTicketCurrentStep" ReturnType="Collection(WorkflowEngineModel.Proc_QueryTicketCurrentStep_Result)">
+            <Parameter Name="ticketNum" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Proc_QueryTicketProgress" ReturnType="Collection(WorkflowEngineModel.Proc_QueryTicketProgress_Result)">
+            <Parameter Name="ticketNum" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
+        <ComplexType Name="Proc_GetCompletedTickets_Result">
+          <Property Type="String" Name="TicketNum" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TicketTitle" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TicketStatus" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="wfCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="wfName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="proposer" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Approver" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApproverName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetInprogressTickets_Result">
+          <Property Type="String" Name="TicketNum" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TicketTitle" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TicketStatus" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="wfCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="wfName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="proposer" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Approver" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApproverName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Proc_GetTodoTickets_Result">
+          <Property Type="String" Name="TicketNum" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TicketTitle" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TicketStatus" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="wfCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="wfName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="proposer" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDatetime" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Approver" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApproverName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Proc_IsCurrentApprover_Result">
+          <Property Type="Guid" Name="id" Nullable="false" />
+          <Property Type="String" Name="TicketNum" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="wfCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepFlag" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="ApprovedResult" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Approver" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApproverName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ApprovedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ApproverMemo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Proc_QueryCurrentApprovers_Result">
+          <Property Type="Guid" Name="Column1" Nullable="true" />
+          <Property Type="String" Name="TicketNum" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="wfCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepFlag" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="AccountID" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Proc_QueryTicketCurrentStep_Result">
+          <Property Type="Guid" Name="id" Nullable="false" />
+          <Property Type="String" Name="TicketNum" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="wfCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepFlag" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApprovedResult" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Approver" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApproverName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ApprovedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ApproverMemo" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Proc_QueryTicketProgress_Result">
+          <Property Type="Guid" Name="id" Nullable="false" />
+          <Property Type="String" Name="TicketNum" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="wfCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepCode" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="StepFlag" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApprovedResult" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="Approver" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApproverName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ApprovedDatetime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ApproverMemo" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -205,6 +542,96 @@
                 <ScalarProperty Name="AccountPWD" ColumnName="AccountPWD" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ticket_SeqT">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.Ticket_SeqT">
+              <MappingFragment StoreEntitySet="Ticket_SeqT">
+                <ScalarProperty Name="SeqID" ColumnName="SeqID" />
+                <ScalarProperty Name="SeqVal" ColumnName="SeqVal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.Tickets">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="TicketTitle" ColumnName="TicketTitle" />
+                <ScalarProperty Name="TicketStatus" ColumnName="TicketStatus" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="wfName" ColumnName="wfName" />
+                <ScalarProperty Name="proposer" ColumnName="proposer" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketsDefaultApproverGroup">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.TicketsDefaultApproverGroup">
+              <MappingFragment StoreEntitySet="TicketsDefaultApproverGroup">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketsDefaultApprovers">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.TicketsDefaultApprovers">
+              <MappingFragment StoreEntitySet="TicketsDefaultApprovers">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketsLog">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.TicketsLog">
+              <MappingFragment StoreEntitySet="TicketsLog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="StepFlag" ColumnName="StepFlag" />
+                <ScalarProperty Name="ApprovedResult" ColumnName="ApprovedResult" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="ApproverName" ColumnName="ApproverName" />
+                <ScalarProperty Name="ApprovedDatetime" ColumnName="ApprovedDatetime" />
+                <ScalarProperty Name="ApproverMemo" ColumnName="ApproverMemo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketsStepPath">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.TicketsStepPath">
+              <MappingFragment StoreEntitySet="TicketsStepPath">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FromStepCode" ColumnName="FromStepCode" />
+                <ScalarProperty Name="ToStepCode" ColumnName="ToStepCode" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="PathType" ColumnName="PathType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketsSteps">
+            <EntityTypeMapping TypeName="WorkflowEngineModel.TicketsSteps">
+              <MappingFragment StoreEntitySet="TicketsSteps">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="StepFlag" ColumnName="StepFlag" />
+                <ScalarProperty Name="IsForcedApproved" ColumnName="IsForcedApproved" />
+                <ScalarProperty Name="ApprovedResult" ColumnName="ApprovedResult" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="ApproverName" ColumnName="ApproverName" />
+                <ScalarProperty Name="ApprovedDatetime" ColumnName="ApprovedDatetime" />
+                <ScalarProperty Name="ApproverMemo" ColumnName="ApproverMemo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -250,15 +677,128 @@
           <EntitySetMapping Name="wfSteps">
             <EntityTypeMapping TypeName="WorkflowEngineModel.wfSteps">
               <MappingFragment StoreEntitySet="wfSteps">
-                <ScalarProperty Name="IsForcedApproved" ColumnName="IsForcedApproved" />
                 <ScalarProperty Name="StepCode" ColumnName="StepCode" />
                 <ScalarProperty Name="StepName" ColumnName="StepName" />
                 <ScalarProperty Name="Flag" ColumnName="Flag" />
                 <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="IsForcedApproved" ColumnName="IsForcedApproved" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Proc_ApprovalDenied" FunctionName="WorkflowEngineModel.Store.Proc_ApprovalDenied" />
+          <FunctionImportMapping FunctionImportName="Proc_ApprovalPassed" FunctionName="WorkflowEngineModel.Store.Proc_ApprovalPassed" />
+          <FunctionImportMapping FunctionImportName="Proc_GetCompletedTickets" FunctionName="WorkflowEngineModel.Store.Proc_GetCompletedTickets">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WorkflowEngineModel.Proc_GetCompletedTickets_Result">
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="TicketTitle" ColumnName="TicketTitle" />
+                <ScalarProperty Name="TicketStatus" ColumnName="TicketStatus" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="wfName" ColumnName="wfName" />
+                <ScalarProperty Name="proposer" ColumnName="proposer" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="ApproverName" ColumnName="ApproverName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetInprogressTickets" FunctionName="WorkflowEngineModel.Store.Proc_GetInprogressTickets">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WorkflowEngineModel.Proc_GetInprogressTickets_Result">
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="TicketTitle" ColumnName="TicketTitle" />
+                <ScalarProperty Name="TicketStatus" ColumnName="TicketStatus" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="wfName" ColumnName="wfName" />
+                <ScalarProperty Name="proposer" ColumnName="proposer" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="ApproverName" ColumnName="ApproverName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_GetTodoTickets" FunctionName="WorkflowEngineModel.Store.Proc_GetTodoTickets">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WorkflowEngineModel.Proc_GetTodoTickets_Result">
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="TicketTitle" ColumnName="TicketTitle" />
+                <ScalarProperty Name="TicketStatus" ColumnName="TicketStatus" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="wfName" ColumnName="wfName" />
+                <ScalarProperty Name="proposer" ColumnName="proposer" />
+                <ScalarProperty Name="CreatedDatetime" ColumnName="CreatedDatetime" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="ApproverName" ColumnName="ApproverName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_IsCurrentApprover" FunctionName="WorkflowEngineModel.Store.Proc_IsCurrentApprover">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WorkflowEngineModel.Proc_IsCurrentApprover_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="StepFlag" ColumnName="StepFlag" />
+                <ScalarProperty Name="ApprovedResult" ColumnName="ApprovedResult" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="ApproverName" ColumnName="ApproverName" />
+                <ScalarProperty Name="ApprovedDatetime" ColumnName="ApprovedDatetime" />
+                <ScalarProperty Name="ApproverMemo" ColumnName="ApproverMemo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_NewSeqVal" FunctionName="WorkflowEngineModel.Store.Proc_NewSeqVal" />
           <FunctionImportMapping FunctionImportName="Proc_NewTicket" FunctionName="WorkflowEngineModel.Store.Proc_NewTicket" />
+          <FunctionImportMapping FunctionImportName="Proc_QueryCurrentApprovers" FunctionName="WorkflowEngineModel.Store.Proc_QueryCurrentApprovers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WorkflowEngineModel.Proc_QueryCurrentApprovers_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="StepFlag" ColumnName="StepFlag" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_QueryTicketCurrentStep" FunctionName="WorkflowEngineModel.Store.Proc_QueryTicketCurrentStep">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WorkflowEngineModel.Proc_QueryTicketCurrentStep_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="StepFlag" ColumnName="StepFlag" />
+                <ScalarProperty Name="ApprovedResult" ColumnName="ApprovedResult" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="ApproverName" ColumnName="ApproverName" />
+                <ScalarProperty Name="ApprovedDatetime" ColumnName="ApprovedDatetime" />
+                <ScalarProperty Name="ApproverMemo" ColumnName="ApproverMemo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Proc_QueryTicketProgress" FunctionName="WorkflowEngineModel.Store.Proc_QueryTicketProgress">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="WorkflowEngineModel.Proc_QueryTicketProgress_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="TicketNum" ColumnName="TicketNum" />
+                <ScalarProperty Name="wfCode" ColumnName="wfCode" />
+                <ScalarProperty Name="StepCode" ColumnName="StepCode" />
+                <ScalarProperty Name="StepName" ColumnName="StepName" />
+                <ScalarProperty Name="StepFlag" ColumnName="StepFlag" />
+                <ScalarProperty Name="ApprovedResult" ColumnName="ApprovedResult" />
+                <ScalarProperty Name="Approver" ColumnName="Approver" />
+                <ScalarProperty Name="ApproverName" ColumnName="ApproverName" />
+                <ScalarProperty Name="ApprovedDatetime" ColumnName="ApprovedDatetime" />
+                <ScalarProperty Name="ApproverMemo" ColumnName="ApproverMemo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

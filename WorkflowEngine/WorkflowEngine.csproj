@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
@@ -55,6 +56,48 @@
       <DependentUpon>wfModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Accounts.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_GetCompletedTickets_Result.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_GetInprogressTickets_Result.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_GetTodoTickets_Result.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_IsCurrentApprover_Result.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_QueryCurrentApprovers_Result.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_QueryTicketCurrentStep_Result.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Proc_QueryTicketProgress_Result.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Tickets.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketsDefaultApproverGroup.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketsDefaultApprovers.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketsLog.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketsStepPath.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TicketsSteps.cs">
+      <DependentUpon>wfModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ticket_SeqT.cs">
       <DependentUpon>wfModel.tt</DependentUpon>
     </Compile>
     <Compile Include="wfDefaultApproverGroup.cs">

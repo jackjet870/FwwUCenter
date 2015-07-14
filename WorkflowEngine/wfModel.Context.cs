@@ -30,11 +30,109 @@ namespace WorkflowEngine
         public virtual DbSet<AccountGroup> AccountGroup { get; set; }
         public virtual DbSet<AccountGroupMembers> AccountGroupMembers { get; set; }
         public virtual DbSet<Accounts> Accounts { get; set; }
+        public virtual DbSet<Ticket_SeqT> Ticket_SeqT { get; set; }
+        public virtual DbSet<Tickets> Tickets { get; set; }
+        public virtual DbSet<TicketsDefaultApproverGroup> TicketsDefaultApproverGroup { get; set; }
+        public virtual DbSet<TicketsDefaultApprovers> TicketsDefaultApprovers { get; set; }
+        public virtual DbSet<TicketsLog> TicketsLog { get; set; }
+        public virtual DbSet<TicketsStepPath> TicketsStepPath { get; set; }
+        public virtual DbSet<TicketsSteps> TicketsSteps { get; set; }
         public virtual DbSet<wfDefaultApproverGroup> wfDefaultApproverGroup { get; set; }
         public virtual DbSet<wfDefaultApprovers> wfDefaultApprovers { get; set; }
         public virtual DbSet<wfDefinition> wfDefinition { get; set; }
         public virtual DbSet<wfStepPath> wfStepPath { get; set; }
         public virtual DbSet<wfSteps> wfSteps { get; set; }
+    
+        public virtual int Proc_ApprovalDenied(string userid, string ticketNum, string memo)
+        {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            var ticketNumParameter = ticketNum != null ?
+                new ObjectParameter("ticketNum", ticketNum) :
+                new ObjectParameter("ticketNum", typeof(string));
+    
+            var memoParameter = memo != null ?
+                new ObjectParameter("memo", memo) :
+                new ObjectParameter("memo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_ApprovalDenied", useridParameter, ticketNumParameter, memoParameter);
+        }
+    
+        public virtual int Proc_ApprovalPassed(string userid, string ticketNum, string memo)
+        {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            var ticketNumParameter = ticketNum != null ?
+                new ObjectParameter("ticketNum", ticketNum) :
+                new ObjectParameter("ticketNum", typeof(string));
+    
+            var memoParameter = memo != null ?
+                new ObjectParameter("memo", memo) :
+                new ObjectParameter("memo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_ApprovalPassed", useridParameter, ticketNumParameter, memoParameter);
+        }
+    
+        public virtual ObjectResult<Proc_GetCompletedTickets_Result> Proc_GetCompletedTickets(string userid, string wfCode)
+        {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            var wfCodeParameter = wfCode != null ?
+                new ObjectParameter("wfCode", wfCode) :
+                new ObjectParameter("wfCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_GetCompletedTickets_Result>("Proc_GetCompletedTickets", useridParameter, wfCodeParameter);
+        }
+    
+        public virtual ObjectResult<Proc_GetInprogressTickets_Result> Proc_GetInprogressTickets(string userid, string wfCode)
+        {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            var wfCodeParameter = wfCode != null ?
+                new ObjectParameter("wfCode", wfCode) :
+                new ObjectParameter("wfCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_GetInprogressTickets_Result>("Proc_GetInprogressTickets", useridParameter, wfCodeParameter);
+        }
+    
+        public virtual ObjectResult<Proc_GetTodoTickets_Result> Proc_GetTodoTickets(string userid, string wfCode)
+        {
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            var wfCodeParameter = wfCode != null ?
+                new ObjectParameter("wfCode", wfCode) :
+                new ObjectParameter("wfCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_GetTodoTickets_Result>("Proc_GetTodoTickets", useridParameter, wfCodeParameter);
+        }
+    
+        public virtual ObjectResult<Proc_IsCurrentApprover_Result> Proc_IsCurrentApprover(string ticketNum, string userid)
+        {
+            var ticketNumParameter = ticketNum != null ?
+                new ObjectParameter("ticketNum", ticketNum) :
+                new ObjectParameter("ticketNum", typeof(string));
+    
+            var useridParameter = userid != null ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_IsCurrentApprover_Result>("Proc_IsCurrentApprover", ticketNumParameter, useridParameter);
+        }
+    
+        public virtual int Proc_NewSeqVal()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_NewSeqVal");
+        }
     
         public virtual int Proc_NewTicket(string userid, string wfCode)
         {
@@ -47,6 +145,37 @@ namespace WorkflowEngine
                 new ObjectParameter("wfCode", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Proc_NewTicket", useridParameter, wfCodeParameter);
+        }
+    
+        public virtual ObjectResult<Proc_QueryCurrentApprovers_Result> Proc_QueryCurrentApprovers(string ticketNum, string stepCode)
+        {
+            var ticketNumParameter = ticketNum != null ?
+                new ObjectParameter("ticketNum", ticketNum) :
+                new ObjectParameter("ticketNum", typeof(string));
+    
+            var stepCodeParameter = stepCode != null ?
+                new ObjectParameter("stepCode", stepCode) :
+                new ObjectParameter("stepCode", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_QueryCurrentApprovers_Result>("Proc_QueryCurrentApprovers", ticketNumParameter, stepCodeParameter);
+        }
+    
+        public virtual ObjectResult<Proc_QueryTicketCurrentStep_Result> Proc_QueryTicketCurrentStep(string ticketNum)
+        {
+            var ticketNumParameter = ticketNum != null ?
+                new ObjectParameter("ticketNum", ticketNum) :
+                new ObjectParameter("ticketNum", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_QueryTicketCurrentStep_Result>("Proc_QueryTicketCurrentStep", ticketNumParameter);
+        }
+    
+        public virtual ObjectResult<Proc_QueryTicketProgress_Result> Proc_QueryTicketProgress(string ticketNum)
+        {
+            var ticketNumParameter = ticketNum != null ?
+                new ObjectParameter("ticketNum", ticketNum) :
+                new ObjectParameter("ticketNum", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Proc_QueryTicketProgress_Result>("Proc_QueryTicketProgress", ticketNumParameter);
         }
     }
 }

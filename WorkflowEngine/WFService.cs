@@ -9,7 +9,7 @@ namespace WorkflowEngine
     public class WFService
     {
         /*
-         * 流程步骤缺少是否强制审批属性，用于流程正向、逆向来回跳转，默认为非强制审批
+         * 
          * 
          * 
          * 
@@ -17,49 +17,127 @@ namespace WorkflowEngine
          * 
          * 
          */
-        public string TestFunc()
+        public int NewTicket(string userID, string wfCode)
         {
-            return "Hello World";
+            int returnVal = 0;
+            using(WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {            
+                returnVal = db.Proc_NewTicket(userID, wfCode);
+            };
+            
+            
+            return returnVal;
         }
 
-        public string NewTicket(string userID, string wfCode)
+        public int ApprovalPassed(string userID, string ticketNum, string memo)
         {
-            return "dlfjalfdsjkfa";
-        }
+            int returnVal = 0;
+            using (WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {
+                returnVal = db.Proc_ApprovalPassed(userID, ticketNum, memo);
+            };
 
-        public int GotoNextStep(string userID, string approveResult, string ticketNum,string currentStemCode)
-        {
-            return 1;
+
+            return returnVal;
         
         }
 
-        public string GetTodoTickets()
+        public int ApprovalDenied(string userID, string ticketNum, string memo)
         {
-            //获取待处理单子
-            return "dlfjalfdsjkfa";
-        }
-        public string GetInprogressTickets()
-        {
-            //获取已处理单子
-            return "dlfjalfdsjkfa";
-        }
-        public string GetCompletedTickets()
-        {
-            //获取已完成单子
-            return "dlfjalfdsjkfa";
-        }
-        public string GetCurrentStep()
-        {
-            return "dlfjalfdsjkfa";
-        }
-        public string GetCurrentStepApprovers()
-        {
-            return "dlfjalfdsjkfa";
+            int returnVal = 0;
+            using (WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {
+                returnVal = db.Proc_ApprovalDenied(userID, ticketNum, memo);
+            };
+
+
+            return returnVal;
+
         }
 
-        public string GetIFCurrentApproverOrNot()
+        public List<Proc_GetTodoTickets_Result> GetTodoTickets(string userid, string wfCode)
         {
-            return "dlfjalfdsjkfa";
+            //获取待处理单子
+            List<Proc_GetTodoTickets_Result> returnVal;
+            using (WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {
+                returnVal = db.Proc_GetTodoTickets(userid, wfCode).ToList();
+
+            }
+            return returnVal;
+        }
+        public List<Proc_GetInprogressTickets_Result> GetInprogressTickets(string userid, string wfCode)
+        {
+            //获取已处理单子
+            List<Proc_GetInprogressTickets_Result> returnVal;
+            using (WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {
+                returnVal = db.Proc_GetInprogressTickets(userid, wfCode).ToList();
+
+            }
+            return returnVal;
+        }
+        public List<Proc_GetCompletedTickets_Result> GetCompletedTickets(string userid, string wfCode)
+        {
+            //获取已完成单子
+            List<Proc_GetCompletedTickets_Result> returnVal;
+            using (WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {
+                returnVal = db.Proc_GetCompletedTickets(userid, wfCode).ToList();
+
+            }
+            return returnVal;
+        }
+        public bool IsCurrentApprover(string userid,string ticketNum)
+        {
+            bool returnVal = false;
+            List<Proc_IsCurrentApprover_Result> templist;
+            using (WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {
+                templist = db.Proc_IsCurrentApprover(userid, ticketNum).ToList();
+                if (templist != null)
+                {
+                    if (templist.Count() > 0)
+                        returnVal = true;
+                }
+
+            }
+            return returnVal;
+        }
+        public List<Proc_QueryCurrentApprovers_Result> QueryCurrentApprovers(string ticketNum,string stepCode)
+        {
+            List<Proc_QueryCurrentApprovers_Result> list;
+
+            using (WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {
+                list = db.Proc_QueryCurrentApprovers(ticketNum, stepCode).ToList();
+            }
+
+            return list;
+        }
+
+        public List<Proc_QueryTicketCurrentStep_Result> QueryTicketCurrentStep(string ticketNum)
+        {
+            List<Proc_QueryTicketCurrentStep_Result> list;
+
+            using (WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {
+                list = db.Proc_QueryTicketCurrentStep(ticketNum).ToList();
+            }
+
+            return list;
+        }
+
+        public List<Proc_QueryTicketProgress_Result> QueryTicketProgress(string ticketNum)
+        {
+            List<Proc_QueryTicketProgress_Result> list;
+
+            using (WorkflowEngineEntities db = new WorkflowEngineEntities())
+            {
+                list = db.Proc_QueryTicketProgress(ticketNum).ToList();
+            }
+
+            return list;
         }
 
 

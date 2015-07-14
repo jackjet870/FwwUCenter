@@ -13,7 +13,7 @@ namespace WorkflowAdmin.Controllers
         public ActionResult Index()
         {
             WFService wf = new WFService();
-            ViewBag.Message = wf.TestFunc();
+            //ViewBag.Message = wf.TestFunc();
             return View();
         }
 

@@ -127,7 +127,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
-    <Compile Include="Controllers\IncidentController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\WalletController.cs" />
     <Compile Include="Controllers\CouponController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -208,13 +208,13 @@
     <Content Include="Views\Wallet\WalletPurchase.cshtml" />
     <Content Include="Views\Wallet\MyBill.cshtml" />
     <Content Include="Views\Account\MyMembers.cshtml" />
-    <Content Include="Views\Incident\NewCompany.cshtml" />
-    <Content Include="Views\Incident\NewAgent.cshtml" />
-    <Content Include="Views\Incident\NewOperationCenter.cshtml" />
+    <Content Include="Views\Ticket\NewCompany.cshtml" />
+    <Content Include="Views\Ticket\NewAgent.cshtml" />
+    <Content Include="Views\Ticket\NewOperationCenter.cshtml" />
     <Content Include="Views\Orders\MyOrders.cshtml" />
     <Content Include="Views\Orders\NewOrder.cshtml" />
     <Content Include="Views\Orders\LookupOrder.cshtml" />
-    <Content Include="Views\Incident\MyIncident.cshtml" />
+    <Content Include="Views\Ticket\MyTicket.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +226,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WorkflowEngine\WorkflowEngine.csproj">
+      <Project>{03c1b382-cd4f-45e9-8c98-19515f87a4b5}</Project>
+      <Name>WorkflowEngine</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

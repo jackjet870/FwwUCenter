@@ -18,7 +18,8 @@ namespace FwwWorkCenter.Controllers
         [HttpPost]
         public ActionResult SignIn(string UserName, string Password)
         {
-            //UserName.ToUpper() == "ZCZCZY" && Password.ToUpper() == "ZCZCZY2015"
+            //这个是服务网会员中心 需要用服务网的验证逻辑来验证
+            //前台需要加入验证码机制
             if (!String.IsNullOrEmpty(UserName))
             {
                 FormsAuthentication.SetAuthCookie(UserName, false);

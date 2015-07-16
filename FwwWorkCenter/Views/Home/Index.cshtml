@@ -4,19 +4,49 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title 中国消费服务网会员中心</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <form action="/Home/SignIn" method="post">
-        服务网工作台
-        <input type="text" name="UserName" placeholder="用户名" />
+    <div class="container">
+        <div class="text-center">
+            <h1></h1>
+            <div class="row">
+                <div class="col-md-5 col-md-offset-3 ">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><p class="help-block">工作台登录</p></div>
+                        <div class="panel-body">
+                            <form role="form" class="form-vertical" method="post" action="/Home/SignIn">
+                                
+                                <br />
+                                <div class="form-group">
+                                    <label class="sr-only" for="Username">Username</label>
+                                    <input type="text" class="form-control input-lg" name="UserName" placeholder="用户名 或 会员卡号" autofocus>
+                                </div>
 
-        <input type="password" name="Password" placeholder="密码" />
+                                <div class="form-group">
+                                    <label class="sr-only" for="Password">Password</label>
+                                    <input type="password" class="form-control input-lg" name="Password" placeholder="密码">
+                                </div>
 
-        <button type="submit">登陆</button>
+                                <button type="submit" class="btn btn-success btn-lg btn-block ">登录</button>
+                                <br />
 
-    </form>
+
+
+                                <br />
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

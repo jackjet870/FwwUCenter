@@ -1,31 +1,168 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    
+    function queryuser(thisobj) {
+        var userid = $("#userid").val();
+        if (userid != null && userid !="") {
+            var a = "/User?userid=" + userid;
+            //window.location.href = a;
+            window.open( a);
+        }
+      
+        
+    }
+
+    function queryticket(thisobj) {
+        var userid = $("#ticketid").val();
+        if (userid != null && userid != "") {
+            var a = "/User?userid=" + userid;
+            //window.location.href = a;
+            window.open(a);
+        }
+
+
+    }
+    function queryorder(thisobj) {
+        var userid = $("#orderid").val();
+        if (userid != null && userid != "") {
+            var a = "/User?userid=" + userid;
+            //window.location.href = a;
+            window.open(a);
+        }
+
+
+    }
+
+    function querycoupon(thisobj) {
+        var couponidfrom = $("#couponidfrom").val();
+        var couponidto = $("#couponidto").val();
+        if (couponidfrom != null && couponidfrom != "") {
+            var a = "/User?couponidfrom=" + couponidfrom + "&couponidto=" + couponidto;
+            //window.location.href = a;
+            window.open(a);
+        }
+
+
+    }
+</script>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="col-md-12 ">
+        <h2>会员查询</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control input-lg" id="userid" placeholder="用户名" autofocus>
+            </div>
+            <div class="col-md-2 ">
+                <input type="button" value="查询" class="btn btn-success btn-lg btn-block"  onclick="javascript: queryuser(this);" />
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h2>工单查询</h2>
+        <div class="row">
+
+            <div class="col-md-8">
+                <p class="help-block-right">
+
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup" id="inlineRadio1" value="option1" checked>待处理
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup" id="inlineRadio2" value="option2"> 已处理
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup" id="inlineRadio2" value="option2"> 已完成
+                    </label>
+                </p>
+                <p class="help-block-right">
+
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup1" id="Radio1" value="option1" checked>商家申请
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup1" id="Radio2" value="option2"> 代理商申请
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup1" id="Radio3" value="option2"> 服务中心申请
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup1" id="Radio3" value="option2"> 体验中心申请
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup1" id="Radio3" value="option2"> 运营中心申请
+                    </label>
+                </p>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control input-lg" id="ticketid" placeholder="工单号 或 用户名" >
+            </div>
+            <div class="col-md-2">
+                <input type="button" value="查询" class="btn btn-success btn-lg btn-block" onclick="javascript: queryticket(this);" />
+                
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h2>订单查询</h2>
+        <div class="row">
+
+            <div class="col-md-8">
+                <p class="help-block-right">
+
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup2" id="inlineRadio1" value="option1" checked>待付款
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup2" id="inlineRadio2" value="option2"> 已付款
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="rgroup2" id="inlineRadio2" value="option2"> 已发货
+                    </label>
+                </p>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" class="form-control input-lg" id="orderid" placeholder="订单号 或 用户名" >
+            </div>
+            <div class="col-md-2">
+                <input type="button" value="查询" class="btn btn-success btn-lg btn-block" onclick="javascript: queryorder(this);" />
+
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12">
+        <h2>卷查询</h2>
+        <div class="row">
+            <div class="col-md-2">
+                <input type="text" class="form-control input-lg" id="couponidfrom" placeholder="开始号段">
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control input-lg" id="couponidto" placeholder="结束号段">
+            </div>
+            <div class="col-md-2">
+                <input type="button" value="查询" class="btn btn-success btn-lg btn-block" onclick="javascript: querycoupon(this);" />
+
+            </div>
+        </div>
     </div>
 </div>

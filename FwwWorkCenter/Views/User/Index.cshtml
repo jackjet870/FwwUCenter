@@ -1,5 +1,92 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-user
-@ViewBag.Message
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="panel panel-default">
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Dropdown
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">用户名：@ViewBag.Message
+                            
+                        </div>
+                        <div class="panel-body">
+                           
+                            <p>姓名</p>
+                            <p>身份证号</p>
+                            <p>邮箱</p>
+                            <p>电话</p>
+                            <p>会员卡号</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">财务信息</div>
+                        <div class="panel-body">
+                            <p>收款人姓名</p>
+                            <p>银行卡号</p>
+                            <p>开户行地址</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">公司信息</div>
+                        <div class="panel-body">
+                            
+                            <p>营业执照号码</p>
+                            <p>公司名称</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <p>other</p>p>other</p>p>other</p>p>other</p>p>other</p>p>other</p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src=@ViewBag.imgsrc></iframe>>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+

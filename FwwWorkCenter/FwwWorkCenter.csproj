@@ -122,6 +122,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Image\ksbl.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -155,10 +156,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\UserQualification.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Image\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

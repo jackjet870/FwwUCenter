@@ -33,6 +33,16 @@ namespace FwwUCenter.Controllers
             FormsAuthentication.SignOut();
             return Redirect("/");
         }
+
+        public ActionResult ForgetPWD()
+        {
+            return View();
+        }
+
+        public ActionResult NewUser()
+        {
+            return View();
+        }
         
 
     }

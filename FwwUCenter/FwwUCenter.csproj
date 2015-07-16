@@ -139,6 +139,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\image\hykdl.png" />
     <Content Include="Content\image\Icon\ksbl.jpg" />
     <Content Include="Content\image\Icon\ywbl.jpg" />
     <Content Include="Content\image\Icon\zlws.jpg" />
@@ -152,6 +153,7 @@
     <Content Include="Content\image\Slider\08.jpg" />
     <Content Include="Content\image\Slider\b03.png" />
     <Content Include="Content\image\Slider\loading.gif" />
+    <Content Include="Content\image\yhmdl.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -216,6 +218,8 @@
     <Content Include="Views\Orders\LookupOrder.cshtml" />
     <Content Include="Views\Ticket\MyTicket.cshtml" />
     <Content Include="Views\Dashboard\Dashboard.cshtml" />
+    <Content Include="Views\Home\ForgetPWD.cshtml" />
+    <Content Include="Views\Home\NewUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

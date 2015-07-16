@@ -312,7 +312,7 @@ html {
 
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.428571429;
   color: #333333;
   background-color: #ffffff;
@@ -1934,6 +1934,20 @@ textarea.input-lg {
   color: #737373;
 }
 
+.help-block-left {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+  text-align:left;
+}
+.help-block-right {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+  text-align:right;
+}
 @media (min-width: 768px) {
   .form-inline .form-group {
     display: inline-block;
@@ -4502,8 +4516,8 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #00a2ca;
-  border-color: #00a2ca;
+  background-color: #4b98e3;
+  border-color: #5895d5;
 }
 
 .navbar-inverse .navbar-brand {
